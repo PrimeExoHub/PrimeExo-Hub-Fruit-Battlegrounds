@@ -1,0 +1,204 @@
+local PlayList = {}
+ for i,v in pairs(game:GetService("Workspace").Characters.Players:GetChildren()) do 
+     if v ~= game.Players.LocalPlayer then 
+         table.insert(PlayList,v.Name)
+     end
+ end
+
+
+ local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Loco-CTO/UI-Library/main/VisionLibV2/source.lua'))()
+
+ local Window = Library:Create({
+	Name = "PrimeExo Hub", -- String
+	Footer = "By PrimeExo Hub", -- String
+	ToggleKey = Enum.KeyCode.RightShift, -- Enum.KeyCode
+	LoadedCallback = function()
+		-- Function
+	end,
+
+	KeySystem = true, -- Boolean
+	Key = "f2y7ry2fbfvy8qwt4f8t8uhtrjhudsfhguihaegy8wg", -- String
+	MaxAttempts = 5, -- Integer
+	DiscordLink = "", -- String (Set it to nil if you do not have one, the button will not pop out)
+	ToggledRelativeYOffset = 5 -- Number (Y Offset from bottom of your screen. Set it to nil if you want it to be centred)
+})
+
+local Tab = Window:Tab({
+	Name = "PrimeExo Hub | Main", -- String
+	Icon = "rbxassetid://11396131982", -- String
+	ActivationCallback = function()
+		-- Function
+	end,
+	DeativationCallback = function()
+		-- Function
+	end,
+})
+
+local Section = Tab:Section({
+	Name = "farm" -- String
+})
+ 
+local Toggle = Section:Toggle({
+	Name = "AutoFarm", -- String
+	Default = false, -- Boolean
+	Callback = function(Value)
+      _G.farm = Value
+
+      while wait() do
+      if _G.farm == false then break end
+      for i, v in pairs(game:GetService("Workspace").Characters.Players[xdvalue]:GetChildren()) do
+      if v.Name == "HumanoidRootPart" then
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame * CFrame.new(0,1,2)
+      end
+      end
+      end
+	end
+})
+
+local Dropdown = Section:Dropdown({
+	Name = "Players", -- String
+	Items = PlayList, -- Table
+	Callback = function(Value)
+		xdvalue = Value
+	end
+})
+ 
+
+
+ local Section = Tab:Section({
+	Name = "Skills" -- String
+})
+
+
+local Toggle = Section:Toggle({
+	Name = "Auto Attack", -- String
+	Default = false, -- Boolean
+	Callback = function(Bool)
+      _G.autoattack = Bool
+      while _G.autoattack == true do
+      
+         local args = {
+            [1] = "Core",
+            [2] = "M1",
+            [3] = {}
+        }
+        
+        game:GetService("ReplicatedStorage").Replicator:InvokeServer(unpack(args))
+        wait()
+      end
+   end
+ })
+
+ local Toggle = Section:Toggle({
+	Name = "Auto Skills (Only Fluxus)", -- String
+	Default = false, -- Boolean
+	Callback = function(Value)
+		_G.autoSkills = Value
+      while _G.autoSkills == true do
+       
+         keypress(0x31)
+         wait(5)
+         keyrelease(0x32)
+         wait(5)
+         keyrelease(0x33)
+         wait(5)
+         keyrelease(0x34)
+         wait(5)
+         keyrelease(0x35)
+         wait(5)
+         keyrelease(0x36)
+         wait(5)
+         keyrelease(0x37)
+     wait()
+      end
+   end
+})
+
+
+
+ local Tab = Window:Tab({
+	Name = "PrimeExo Hub | Misc", -- String
+	Icon = "rbxassetid://11396131982", -- String
+	ActivationCallback = function()
+		-- Function
+	end,
+	DeativationCallback = function()
+		-- Function
+	end,
+})
+
+
+local Section = Tab:Section({
+	Name = "general" -- String
+})
+
+
+local Slider = Section:Slider({
+	Name = "Walkspeed", -- String
+	Max = 500, -- Integer
+	Min = 0, -- Integer
+	Default = 16, -- Integer
+	Callback = function(Value)
+      _G.HackedWalkSpeed = Value
+ 
+      local Plrs = game:GetService("Players")
+       
+      local MyPlr = Plrs.LocalPlayer
+      local MyChar = MyPlr.Character
+       
+      if MyChar then
+      local Hum = MyChar.Humanoid
+      Hum.Changed:connect(function()
+      Hum.WalkSpeed = _G.HackedWalkSpeed
+      end)
+      Hum.WalkSpeed = _G.HackedWalkSpeed
+      end
+       
+       
+      MyPlr.CharacterAdded:connect(function(Char)
+      MyChar = Char
+      repeat wait() until Char:FindFirstChild("Humanoid")
+      local Hum = Char.Humanoid
+      Hum.Changed:connect(function()
+      Hum.WalkSpeed = _G.HackedWalkSpeed
+      end)
+      Hum.WalkSpeed = _G.HackedWalkSpeed
+      end)
+           end
+        })
+
+
+        local Slider = Section:Slider({
+         Name = "JumpPower", -- String
+         Max = 500, -- Integer
+         Min = 0, -- Integer
+         Default = 16, -- Integer
+         Callback = function(Value)
+            _G.HackedJumpPower = Value
+       
+            local Plrs = game:GetService("Players")
+             
+            local MyPlr = Plrs.LocalPlayer
+            local MyChar = MyPlr.Character
+             
+            if MyChar then
+            local Hum = MyChar.Humanoid
+            Hum.Changed:connect(function()
+            Hum.JumpPower = _G.HackedJumpPower
+            end)
+            Hum.JumpPower = _G.HackedJumpPower
+            end
+             
+             
+            MyPlr.CharacterAdded:connect(function(Char)
+            MyChar = Char
+            repeat wait() until Char:FindFirstChild("Humanoid")
+            local Hum = Char.Humanoid
+            Hum.Changed:connect(function()
+            Hum.JumpPower = _G.HackedJumpPower
+            end)
+            Hum.JumpPower = _G.HackedJumpPower
+            end)
+                 end
+              })
+      
